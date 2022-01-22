@@ -15,7 +15,10 @@ class DonorCardGenerator:
         self.light_font = "assets/font/NotoSansKR-Light.otf"
         self.context_font = "assets/font/GamjaFlower-Regular.ttf"
 
-    def write_user_image(self, input_image):
+    def write_user_image(self, input_image_id):
+
+        input_image_id = str(input_image_id).zfill(2)
+        input_image = "assets/image/{}.png".format(input_image_id)
 
         self.input_image = Image.open(input_image).convert("RGBA")
         self.input_image = self.input_image.resize((200, 200))
@@ -54,8 +57,8 @@ class DonorCardGenerator:
 if __name__ == '__main__':
 
     temp = DonorCardGenerator()
-    temp.write_user_image('assets/image/test.png')
-    temp.write_template_text('2021.01.19', '인천멋사혈액원', '전혈', '320', '01-23-456789')
-    temp.write_user_text("집에 가고 싶어요")
+    temp.write_user_image(1)
+    temp.write_template_text('2021.01.19', '여기에 혈액원이 들어갑니다', '전혈', '320', '01-23-456789')
+    temp.write_user_text("여기에 문구가 들어갑니다")
     print(temp.get_binary_image())
     temp.show_image()
